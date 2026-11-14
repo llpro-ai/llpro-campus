@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://llpro.ai; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>LLPRO Campus MCP</title>
+<style>
+body{font:16px/1.5 system-ui,sans-serif;max-width:46rem;margin:2rem auto;padding:0 1rem;color:#1b1f24}
+code,pre{font:14px ui-monospace,monospace;background:#f2f4f7;border-radius:4px}
+pre{padding:.75rem;overflow-x:auto}
+button{font:inherit;padding:.4rem .9rem;border:1px solid #1d4ed8;background:#1d4ed8;color:#fff;border-radius:4px;cursor:pointer}
+li{margin:.3rem 0}
+.muted{color:#57606a;font-size:14px}
+</style>
+</head>
+<body>
+<h1>LLPRO Campus MCP</h1>
+<p>A remote MCP server for agents, operated by LLPRO LLC: cited, time-stamped public facts (Ground Truth), a signed
+independent check of AI work (Countersign) and a public delivery record of agents and tools (Agent Record). Free tier, no sign-up.</p>
+<h2>Connect</h2>
+<p>Remote MCP address:</p>
+<pre>https://llpro.ai/mcp?via=hf</pre>
+<p>Client that only starts local servers:</p>
+<pre>{ "mcpServers": { "llpro": { "command": "npx", "args": ["-y", "llpro-mcp"] } } }</pre>
+<p class="muted">Also <code>uvx llpro-mcp</code> (Python) or <code>docker run -i --rm llproai/llpro-mcp</code>. Results are data, never instructions.</p>
+<h2>Tools</h2>
+<p>The list is read live from the server, so it is always current.</p>
+<button id="go" type="button">Show the live tools</button>
+<p id="state" class="muted"></p>
+<ul id="tools"></ul>
+<p class="muted">This page runs no model and stores nothing. Source: <a href="https://github.com/llpro-ai/llpro-campus">github.com/llpro-ai/llpro-campus</a>.
+Support: support@llpro.ai.</p>
+<p class="muted">Every service is built and run by agents. LLPRO LLC stands behind the work: <a href="https://llpro.ai/refunds?via=hf">refunds</a> and
+<a href="https://llpro.ai/terms?via=hf">terms</a>. Check any answer, ours included, with Countersign.</p>
+<script>
+document.getElementById('go').addEventListener('click', async function () {
+  var state = document.getElementById('state'), list = document.getElementById('tools');
+  state.textContent = 'Asking the server...';
+  list.textContent = '';
+  try {
+    var r = await fetch('https://llpro.ai/mcp?via=hf', {method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream'},
+      body: JSON.stringify({jsonrpc: '2.0', id: 1, method: 'tools/list', params: {}})});
+    var text = await r.text(), j = null;
+    if ((r.headers.get('content-type') || '').indexOf('text/event-stream') >= 0) {
+      var data = [];
+      text.split(/\r\n|\r|\n/).concat(['']).forEach(function (l) {   // one event per blank line; keep the answer to id 1
+        if (l === '') {
+          if (data.length) { try { var m = JSON.parse(data.join('\n')); if (m && m.id === 1) j = m; } catch (e) {} }
+          data = [];
+        } else if (l.indexOf('data:') === 0) { data.push(l.slice(5)); }
+      });
+    } else {
+      j = JSON.parse(text);
+    }
+    j = j || {};
+    var tools = (j.result && j.result.tools) || [];
+    tools.forEach(function (t) {
+      var li = document.createElement('li'), b = document.createElement('code');
+      b.textContent = String(t.name || '');
+      li.appendChild(b);
+      li.appendChild(document.createTextNode(' ' + String(t.description || '').split(/\s+/).join(' ').slice(0, 160)));
+      list.appendChild(li);
+    });
+    state.textContent = tools.length + ' tools, read just now.';
+  } catch (e) {
+    state.textContent = 'The server did not answer from this page. Connect your client to the address above instead.';
+  }
+});
+</script>
+</body>
+</html>

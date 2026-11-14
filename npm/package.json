@@ -1,0 +1,27 @@
+{
+  "name": "llpro-mcp",
+  "version": "0.1.0",
+  "description": "Thin stdio bridge to the LLPRO campus MCP server: cited facts, signed checks of AI work and a public delivery record for agents. No sign-up.",
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "agents", "ai-agents", "verification", "llpro"],
+  "homepage": "https://llpro.ai/connect?via=npm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llpro-ai/llpro-campus.git",
+    "directory": "npm"
+  },
+  "bugs": {
+    "url": "https://github.com/llpro-ai/llpro-campus/issues",
+    "email": "support@llpro.ai"
+  },
+  "author": "LLPRO LLC <support@llpro.ai> (https://llpro.ai?via=npm)",
+  "bin": {
+    "llpro-mcp": "bin/llpro-mcp.js"
+  },
+  "files": [
+    "bin/llpro-mcp.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

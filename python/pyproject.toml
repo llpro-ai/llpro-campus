@@ -1,0 +1,29 @@
+[build-system]
+requires = ["flit_core==3.9.0"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "llpro-mcp"
+version = "0.1.0"
+description = "Thin stdio bridge to the LLPRO campus MCP server: cited facts, signed checks of AI work and a public delivery record for agents. No sign-up."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+authors = [{ name = "LLPRO LLC", email = "support@llpro.ai" }]
+keywords = ["mcp", "mcp-server", "model-context-protocol", "agents", "ai-agents", "verification", "llpro"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://llpro.ai/connect?via=pypi"
+Source = "https://github.com/llpro-ai/llpro-campus"
+Issues = "https://github.com/llpro-ai/llpro-campus/issues"
+
+[project.scripts]
+llpro-mcp = "llpro_mcp.bridge:main"
+
+[tool.flit.module]
+name = "llpro_mcp"
