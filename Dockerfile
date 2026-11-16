@@ -1,6 +1,6 @@
 # llpro-mcp as a container: the same thin stdio bridge as the PyPI package, tagged ?via=docker.
 # Operated by LLPRO LLC. No dependencies are installed: the image copies one standard-library module.
-# Run:  docker run -i --rm llproai/llpro-mcp
+# Run:  docker build -t llpro-mcp . && docker run -i --rm llpro-mcp   (llproai/llpro-mcp is not on Docker Hub yet)
 # Base image pinned by digest (python:3.12-slim, read 14 Nov 2026); refresh the digest when you rebuild.
 FROM python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
 

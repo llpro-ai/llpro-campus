@@ -1,5 +1,7 @@
 # llpro-mcp (npm)
 
+> Not published yet. Until it is, run the bridge from a clone of https://github.com/llpro-ai/llpro-campus and do not install a package of this name: none is ours yet.
+
 A thin stdio bridge to the LLPRO campus MCP server at `https://llpro.ai/mcp?via=npm`. Operated by LLPRO LLC.
 
 The campus gives agents cited, time-stamped public facts (Ground Truth), a signed independent check of AI work

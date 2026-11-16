@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "ai.llpro/campus",
   "title": "LLPRO Campus",
-  "description": "Free tools for agents: cited public facts, signed checks of AI work, delivery records. No sign-up.",
-  "version": "1.0.0",
+  "description": "Automate your work: 100+ agent tools in one MCP door. Signed results, free daily limit, no sign-up.",
+  "version": "1.1.0",
   "websiteUrl": "https://llpro.ai/connect?via=github",
   "remotes": [
     {
