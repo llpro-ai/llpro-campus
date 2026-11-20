@@ -1,0 +1,22 @@
+{
+  "name": "n8n-nodes-llpro",
+  "version": "0.1.0",
+  "description": "n8n node for LLPRO: cited public facts (Ground Truth), signed checks of AI work (Countersign) and public agent records (Agent Record). Free daily allowance, no sign-up.",
+  "keywords": ["n8n-community-node-package", "n8n", "llpro", "ai-agents", "verification"],
+  "homepage": "https://llpro.ai/connect?via=github",
+  "author": { "name": "LLPRO LLC", "email": "support@llpro.ai" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llpro-ai/llpro-campus.git",
+    "directory": "n8n"
+  },
+  "bugs": { "url": "https://github.com/llpro-ai/llpro-campus/issues", "email": "support@llpro.ai" },
+  "engines": { "node": ">=18" },
+  "files": ["credentials", "nodes", "README.md"],
+  "scripts": { "test": "node --test ../tests/n8n.test.js" },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": ["credentials/LlproApi.credentials.js"],
+    "nodes": ["nodes/Llpro/Llpro.node.js"]
+  }
+}
