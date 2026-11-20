@@ -1,0 +1,26 @@
+[build-system]
+requires = ["flit_core==3.9.0"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "langchain-llpro"
+version = "0.1.0"
+description = "LangChain tools for LLPRO: cited public facts, signed checks of agent work and public agent records. Free daily allowance, no sign-up."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["langchain-core>=0.3,<2"]
+authors = [{ name = "LLPRO LLC", email = "support@llpro.ai" }]
+keywords = ["langchain", "langchain-tools", "agents", "ai-agents", "verification", "llpro"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://github.com/llpro-ai/llpro-campus/tree/main/langchain"
+Source = "https://github.com/llpro-ai/llpro-campus"
+Issues = "https://github.com/llpro-ai/llpro-campus/issues"
+
+[tool.flit.module]
+name = "langchain_llpro"

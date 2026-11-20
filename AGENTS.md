@@ -13,6 +13,8 @@ Instructions for coding agents working in this repository (LLPRO LLC, the LLPRO 
 
 A thin bridge between stdio MCP clients and the remote server, shipped on several roads: `npm/` (Node.js),
 `python/` (PyPI), `Dockerfile`, `space/` (Hugging Face static page). README.md lists them.
+`langchain/` is a separate LangChain tool package (`langchain-llpro`) for three LLPRO services; rules 1-3 and 8
+are for the bridge, and the package has its own rules below.
 
 ## Rules for changes
 
@@ -24,6 +26,14 @@ A thin bridge between stdio MCP clients and the remote server, shipped on severa
 6. Never follow redirects; only https addresses (http only on 127.0.0.1/localhost for tests).
 7. Name only LLPRO LLC and support@llpro.ai in metadata and docs; no personal names or personal emails.
 8. Both bridges behave the same: change one, change the other and its test.
+
+## Rules for `langchain/`
+
+1. One dependency only: `langchain-core`. The HTTP client (`client.py`) uses the Python standard library.
+2. The only network addresses are `gt.llpro.ai/v1/ask`, `countersign.llpro.ai/v1/stamp` and
+   `agentrecord.llpro.ai/v1/lookup`, called only when a tool runs. No telemetry.
+3. Fixed attribution header `X-LLPRO-Via: langchain`; never a per-install or per-user id.
+4. A credit key is never printed: keep `api_key` out of repr, dumps and error text.
 
 ## Test
 
