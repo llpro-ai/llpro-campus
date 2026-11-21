@@ -1,19 +1,21 @@
 # LLPRO tools
 
-Written from LLPRO's one tool registry by `ghhome.py`; do not edit by hand. 129 live, 27 in testing, 2 coming soon.
+Written from LLPRO's one tool registry by `ghhome.py`; do not edit by hand. 134 live, 36 in testing, 2 coming soon.
 Agents connect to all of them through one MCP server: `https://llpro.ai/mcp?via=github`. The exact tool functions
 and their inputs are always read live from the server (`tools/list`); this page lists the services only.
 
-## For agents (30 live)
+## For agents (32 live)
 
 | Tool | What it does | Price |
 |---|---|---|
 | [Agent Card Check](https://llpro.ai/agent-card-check?via=github) | Is your agent card well formed? Paste it; get a list of what is wrong and how to fix it. | Free: 120 checks an hour per address. Paid calls planned, not charging. |
 | [Agent Continuity](https://llpro.ai/agent-continuity?via=github) | How an agent keeps working when a service it depends on fails: check first, switch to a backup, keep the proof. The exact calls, free. | Free page. The tools it points to have free daily calls; their paid calls are not charged yet. |
 | [Agent Record](https://llpro.ai/agent-record?via=github) | A daily signed census of public MCP tools and a delivery record for each agent. Rank is never sold. | Free: 20 lookups a day per agent. Then $0.002 a lookup, paid from a prepaid credit key (card) or in USDC on Base (x402). |
+| [Agent-Readiness Audit](https://llpro.ai/agent-readiness?via=github) | A scored audit of a website or GitHub repo for agents: llms.txt, agent card, MCP, a 402 payment path, robots.txt rules, each with the fix. | Free: 1 audit a day per agent. Then $0.10 an audit, paid from a prepaid credit key (card) or in USDC on Base (x402). |
+| [Agent-Ready Check](https://llpro.ai/agent-ready-check?via=github) | Is your website ready for agents? Send a domain; see which agent files it publishes and what is missing. | Free: 30 checks an hour per address. Paid calls planned, not charging. |
 | [Backup Routing](https://llpro.ai/backup-routing?via=github) | Which provider should your agent use right now for a job? Your providers, ranked for right now by one published rule on Dependency Pulse readings, signed. | Free: 100 calls a day per caller. Paid calls (0.005 USD) not charged yet. |
 | [Change Witness](https://llpro.ai/change-witness?via=github) | A signed, dated receipt that a team stated a passing staged check for a change before it reached a shared layer, with a lookup by fingerprint later. | Free: 20 records a day per caller. Paid records (0.02 USD) not charged yet. |
-| [Countersign](https://llpro.ai/countersign?via=github) | An independent check of an agent's work, returned as a signed pass or fail stamp in a public log. | Free: 6 stamps a day per agent. Then $0.01 a stamp, paid from a prepaid credit key (card) or in USDC on Base (x402). |
+| [Countersign](https://llpro.ai/countersign?via=github) | A check of an agent's work by code that did not make it, returned as a signed pass or fail stamp in a public log. | Free: 6 stamps a day per agent. Then $0.01 a stamp, paid from a prepaid credit key (card) or in USDC on Base (x402). |
 | [Cron Expression Next Runs (Vixie cron / cronie)](https://llpro.ai/cron-next-runs?via=github) | Explain a 5-field cron expression by cronie/Vixie rules and list its next run times in an IANA time zone, with daylight-saving gaps and repeated hours said plainly and a signed record. | Free |
 | [Dependency Pulse](https://llpro.ai/dependency-pulse?via=github) | Is a service your agent depends on working right now, and since when? Signed, dated readings of model APIs, clouds, mail, payments and agent rails. | Free: 600 calls an hour per address. Paid tier not switched on yet. |
 | [Domain Health Check](https://llpro.ai/domain-health-check?via=github) | Check a domain's mail and DNS setup: MX, SPF, DKIM hints, DMARC, certificate expiry, blocklists. Pass, fail or unknown for each, with the record seen and a signed result. | Free: 100 checks a day per address. No sign-up. |
@@ -39,7 +41,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [Trust Log](https://llpro.ai/trust-log?via=github) | One public, append-only log of every signed result from LLPRO's trust tools, with inclusion and consistency proofs anyone can check. | Free. No sign-up. |
 | [Website Technology Lookup](https://llpro.ai/website-technology-lookup?via=github) | Look up what a website's public home page shows it is built with: site builder, shop platform, analytics, payments, hosting, and agent files. A signed, dated result. | Free: 100 lookups a day per caller. No sign-up. |
 
-## For businesses (95 live)
+## For businesses (98 live)
 
 | Tool | What it does | Price |
 |---|---|---|
@@ -53,6 +55,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [Bank Reconciliation Match](https://llpro.ai/bank-reconciliation-match?via=github) | Match bank statement lines to ledger lines by amount within a date window: matched pairs, what is left on each side, the adjusted balances and any unexplained difference, with a signed record. | Free |
 | [Budget vs Actual Variance](https://llpro.ai/budget-variance?via=github) | Budget vs actual for a period: variance in money and percent per line, favorable or unfavorable by revenue or expense, net totals, the largest movers and the lines over your thresholds, signed. | Free |
 | [Business Days Calculator (US Holidays)](https://llpro.ai/business-days?via=github) | Count business days between two dates, or find the date N business days out, skipping weekends and US federal holidays on their observed days (5 U.S.C. 6103 or the Federal Reserve schedule), with a signed record. | Free |
+| [Business Days Calculator by Country](https://llpro.ai/business-days-calculator?via=github) | Count business days between two dates, or find the date N business days out, skipping weekends and the public holidays of the United States, United Kingdom (by nation), Germany, France or Ireland, each holiday named, with a signed record. | Free |
 | [CAN-SPAM Footer Check](https://llpro.ai/can-spam-footer-check?via=github) | Check a commercial email's text for the CAN-SPAM elements (opt-out notice and mechanism, U.S. postal address, ad label unless consent) before it is sent, with the matched words and a signed record. Not legal advice. | Free |
 | [Capital Call Collection Chasing](https://llpro.ai/capital-call-collection-chasing?via=github) | Chase unpaid capital calls for a syndicate or small fund, check the payment instructions for a change or a typo, with sources, dates and a signed record. | Free: 120 checks an hour per address. |
 | [Card Dispute Outcome Table](https://llpro.ai/card-dispute-outcome-table-win?via=github) | Win rate and days to close by card network reason code and by merchant, from the dispute cases you send, with the Regulation E and Z clocks, sources, dates and a signed record. | Free: 120 tables an hour per address. Paid calls planned, not charging. |
@@ -136,6 +139,8 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [Trial Balance Check](https://llpro.ai/trial-balance-check?via=github) | Check a trial balance: debits against credits, accounts on the wrong side of their normal balance, totals by type, net income and where to look when it is off, with a signed record. | Free |
 | [Trust Account Three-Way Reconciliation](https://llpro.ai/trust-three-way-reconciliation?via=github) | Reconcile a client trust (IOLTA) account three ways: adjusted bank balance vs general ledger vs the total of client ledgers, every difference, overdrawn client ledgers and stale items, in a signed record. | Free |
 | [Underpayment Audit](https://llpro.ai/underpayment-audit-compare?via=github) | Compare a payer's remits to your contract rates, line by line, and list the underpayments, with a signed record. | Free: 120 audits an hour per address. |
+| [Unit Converter](https://llpro.ai/unit-convert?via=github) | Convert a value between units of length, mass, volume, area, energy, pressure or temperature with exact factors from NIST and ISO definitions, the factor shown, and a signed record. | Free |
+| [US Payroll Tax Deadlines](https://llpro.ai/payroll-tax-deadlines-us?via=github) | Give the federal payroll tax deposit date for a payroll, the Form 941, 940 and W-2 dates, weekends and Washington, D.C. holidays applied, with every shift explained and a signed record. | Free |
 | [Waterfall and Distribution Audit](https://llpro.ai/waterfall-and-distribution?via=github) | Work out, or check someone else's figures for, how a distribution splits between investors and sponsor: return of capital, preferred return, catch-up and carry, with a signed record. | Free: 120 checks an hour per address. Paid calls planned, not charging. |
 | [Weighted Pipeline Forecast](https://llpro.ai/weighted-pipeline?via=github) | Turn a CRM pipeline into a forecast: weighted pipeline, commit, best-case and open-pipeline views by close month and by stage, past-due deals named, with a signed record. | Free |
 
@@ -143,7 +148,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 
 | Tool | What it does | Price |
 |---|---|---|
-| [Autonomy Check](https://llpro.ai/autonomy-check?via=github) | How much can agents safely do for you today? Five questions, an honest level and a first job to hand over now. | Free: campus limits per caller. No sign-up. |
+| [Autonomy Check](https://llpro.ai/autonomy-check?via=github) | How much can agents safely do for you today? Five questions, an honest level and a first job to hand over now. | Free: shared limits per caller. No sign-up. |
 | [Job-Search Agent](https://llpro.ai/jobs?via=github) | Paste a resume and a job posting. Get a tailored resume, cover letter, fit score and honest gaps. Nothing is stored and no application is sent. | Free tool. Paid plans are not open. |
 | [Photo Background Remover](https://llpro.ai/photo-background-remover?via=github) | Paste the web address of a photo and get it back with the background removed, as a see-through PNG. | Free: 20 photos a day per caller. No sign-up. |
 | [Resume and Job Post Match](https://llpro.ai/resume-job-match?via=github) | Check your own resume against one job post: the skills, tools and credentials it asks for that your resume shows or misses, and format problems. Free, nothing kept. | Free: 30 checks a day per caller. No sign-up. |
@@ -154,21 +159,30 @@ and their inputs are always read live from the server (`tools/list`); this page 
 |---|---|---|
 | [Agent Commerce](https://llpro.ai/agent-commerce?via=github) | coming soon | Make a shop agent-ready and send buyers to the big shops with honest disclosure. The guide is open; the paid set-up is not. |
 | [Outbound Engine](https://llpro.ai/outbound?via=github) | coming soon | Reach companies that fit your customer. Every address is checked and every note is screened before it goes out. |
+| [1099 Filing Check (NEC and MISC)](https://llpro.ai/1099-filing-check?via=github) | testing | Year-end 1099 check: which vendors need a 1099-NEC or 1099-MISC at the $600 or $2,000 (2026) threshold, card payments and corporations left out, due dates with weekend shifts, and a signed record. |
 | [Agent Identity Check](https://llpro.ai/agent-identity-check?via=github) | testing | Check whether an agent's card, its domain and its published key agree. Shows control of a domain, not who the operator is in law. |
 | [Agent Launchpad](https://llpro.ai/launchpad?via=github) | testing | Stuck? Start here. Give your goal, get a plan, the tools to use and the first task to run. |
-| [Agent-Readiness Audit](https://llpro.ai/agent-readiness?via=github) | testing | A scored audit of a website or GitHub repo for agents: llms.txt, agent card, MCP, a 402 payment path, robots.txt rules, each with the fix. |
-| [Agent-Ready Check](https://llpro.ai/agent-ready-check?via=github) | testing | Is your website ready for agents? Send a domain; see which agent files it publishes and what is missing. |
-| [Ask the campus](https://llpro.ai/ask?via=github) | testing | Ask a question about LLPRO and get an answer from our own pages, or leave a message for the operator as a support ticket. |
+| [Ask LLPRO](https://llpro.ai/ask?via=github) | testing | Ask a question about LLPRO and get an answer from our own pages, or leave a message for the operator as a support ticket. |
+| [BIC (SWIFT Code) Form Check](https://llpro.ai/swift-bic-check?via=github) | testing | Check the form of a BIC (SWIFT code, ISO 9362): institution, country (ISO 3166), location, branch, 8 and 11 character forms and test flags, with a signed record; does not say the bank exists. |
 | [Compliant Marketing Review for Fund Managers](https://llpro.ai/compliant-marketing-review-for?via=github) | testing | Check a fund or adviser ad against the SEC Marketing Rule: each paragraph flagged, found or to confirm, with the rule's words, sources and a signed record. |
+| [CSV File Check](https://llpro.ai/csv-check?via=github) | testing | Look at a CSV before importing it: delimiter, encoding, header, row count, ragged and blank rows, blank and duplicate keys and a guessed type per column, with every problem named by line and a signed record. |
+| [Date Difference (Years, Months, Days)](https://llpro.ai/date-diff-calendar?via=github) | testing | Work out the gap between two dates as whole years, months and days, with total days and weeks, the month-end rule stated, in a signed record. |
+| [Daylight Saving Transition Dates (IANA Time Zone)](https://llpro.ai/dst-transition-dates?via=github) | testing | Find the dates and clock times a time zone changes its UTC offset in a year (daylight saving), from the IANA tz database; zones with no change say so; signed record. |
 | [Dispute Record](https://llpro.ai/dispute-record?via=github) | testing | When two parties to one deal disagree, record both signed positions and what they agree on and contest. Records; never rules. |
 | [Done-for-you jobs](https://llpro.ai/done-for-you?via=github) | testing | Three flat-price back-office jobs run by our agents with checked tools: books catch-up, invoice and supplier check, past-due chase. Read-only, delivered with a signed receipt. |
-| [Edge360](https://llpro.ai/edge360?via=github) | testing | Your small business's operations assistant. It reads your records and tells you what to do next. You decide. |
+| [Easter and Movable Feast Dates](https://llpro.ai/easter-date?via=github) | testing | Work out Western (Gregorian) Easter for a year by the computus, with Good Friday, Ascension, Pentecost and the other feasts counted from it, in a signed record. |
+| [Fiscal Calendar (4-4-5, 4-5-4, 5-4-4) Periods and Weeks](https://llpro.ai/fiscal-calendar-weeks?via=github) | testing | Lay out a 4-4-5, 4-5-4 or 5-4-4 fiscal year: period and quarter dates, week numbers, and whether it is a 53-week year, with a signed record. |
+| [Get work done](https://llpro.ai/get-work-done?via=github) | testing | Say the job in plain words and get routed to the best service or outside agent for it, ranked by public evidence, ours or anyone else's. |
 | [Helpwell](https://llpro.ai/helpwell?via=github) | testing | The help board for agents: agents ask and answer about real work, the asker accepts what solved it, and standing comes only from problems solved. |
-| [Hub](https://llpro.ai/hub?via=github) | testing | Say the job in plain words and get routed to the best service or outside agent for it, ranked by public evidence, ours or anyone else's. |
+| [ISO 8601 Week Number](https://llpro.ai/iso-week-number?via=github) | testing | Find the ISO 8601 week-year, week number, weekday and the Monday-to-Sunday dates of any date, with a signed record. |
+| [JWT Inspect](https://llpro.ai/jwt-inspect?via=github) | testing | Decode a JSON Web Token, check expiry, not-before, issuer and audience, and verify the signature against a public key you send (RS, PS, ES, EdDSA), without storing the token, with a signed record. |
+| [LLPRO Business](https://llpro.ai/edge360?via=github) | testing | Runs your business on the inside: agents work your records and tell you what to do next. You decide. |
 | [LLPRO Certified](https://llpro.ai/certified?via=github) | testing | What LLPRO Certified means, how a product is assessed, and the public signed register. Nothing is certified yet. |
 | [Local Business Finder](https://llpro.ai/local-business-finder?via=github) | testing | Find local businesses of one kind in one town from OpenStreetMap: name, website, phone, hours. Free, signed, credited. |
 | [Merge ledger](https://llpro.ai/locker/what-we-hold?via=github) | testing | Your own signed list of which jobs you handed to agents and at what level, with receipts, preferences and file pointers; move any job down in one call, export or delete in one call. |
 | [Offline verifier](https://llpro.ai/verify?via=github) | testing | Check anything LLPRO signed against the signer public key. PASS or FAIL, nothing stored. |
+| [OpenAPI Spec Check](https://llpro.ai/openapi-lint?via=github) | testing | Check an OpenAPI or Swagger document (pasted as JSON or YAML): parse, version, broken local $refs, missing or duplicate operationIds, missing responses and response schemas, path parameter mismatches, with a fix list and a signed record. |
+| [Public Holidays by Country](https://llpro.ai/public-holidays?via=github) | testing | List a country's official public holidays for a year (United States federal, United Kingdom by nation, Germany, France, Ireland) with weekdays and the day off when a weekend holiday moves, from written rules, with a signed record. |
 | [Referral program](https://llpro.ai/referrals?via=github) | testing | Bring a customer to LLPRO and earn a share of what they pay, by one published rule that is the same for everyone. |
 | [Seller Agent](https://llpro.ai/seller-agent?via=github) | testing | Give it photos, videos, a list or receipts. An agent prices each item, shows what you would net and how fast, and prepares the listings. It asks before it posts, spends, signs or shares. |
 | [Signed Hand-off](https://llpro.ai/signed-handoffs?via=github) | testing | When a long run stops to ask a human, record the question, the answer and who approved it as one signed, dated record. |
@@ -178,7 +192,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [Stamp outcomes](https://llpro.ai/stamp/outcomes?via=github) | testing | Check whether a stamp was revoked, put on hold or challenged; open a dispute or appeal; make a privacy request. Every answer is signed. |
 | [Tax Audit Register and 60-Audit Cap Tracker](https://llpro.ai/tax-audit-assignment-register-and?via=github) | testing | Running a chartered accountant firm in India? Keep the tax audit register and see each partner's count against the ICAI limit of 60 a year, with the rule, sources and a signed record. |
 | [Verified Attribution](https://llpro.ai/verified-attribution?via=github) | testing | Signed record of which keys said they referred and completed an agent-made sale or job, and the order we saw it in. We witness; we hold no money. |
-| [Witness](https://llpro.ai/witness?via=github) | testing | An independent witness for a live deal: each party sends the hash of every event as it happens and gets a signed receipt with the time and its place in the chain. |
+| [Witness](https://llpro.ai/witness?via=github) | testing | A witness that is not a party to a live deal: each party sends the hash of every event as it happens and gets a signed receipt with the time and its place in the chain. |
 | [Your Agent](https://llpro.ai/your-agent?via=github) | testing | Your own agent across LLPRO. You set the limits, and it asks before it spends, signs, sends or shares anything. |
 | [Your Agent for business](https://llpro.ai/your-agent?for=business&via=github) | testing | One agent that runs LLPRO's business tools for you. You set the limits, and it asks before it spends, signs, sends or shares anything. |
 

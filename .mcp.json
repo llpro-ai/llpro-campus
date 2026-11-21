@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "llpro": {
+      "type": "http",
+      "url": "https://llpro.ai/mcp?via=github"
+    }
+  }
+}

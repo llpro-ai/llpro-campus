@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "llpro": {
+      "type": "http",
+      "url": "https://llpro.ai/mcp?via=github"
+    },
+    "llpro-countersign": {
+      "type": "http",
+      "url": "https://countersign.llpro.ai/mcp?via=github"
+    },
+    "llpro-agentrecord": {
+      "type": "http",
+      "url": "https://agentrecord.llpro.ai/mcp?via=github"
+    },
+    "llpro-groundtruth": {
+      "type": "http",
+      "url": "https://gt.llpro.ai/mcp?via=github"
+    }
+  }
+}

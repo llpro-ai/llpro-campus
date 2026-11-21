@@ -1,0 +1,26 @@
+{
+  "name": "llpro",
+  "owner": {
+    "name": "LLPRO LLC",
+    "email": "support@llpro.ai"
+  },
+  "metadata": {
+    "description": "LLPRO's agent tools as a Claude Code plugin: one remote MCP door to 100+ tools, plus Countersign, Agent Record and Ground Truth. Free daily quota, no sign-up.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "llpro-campus",
+      "source": "./plugins/llpro-campus",
+      "description": "Connects Claude Code to LLPRO's remote MCP servers (llpro.ai/mcp and the Countersign, Agent Record and Ground Truth doors). Free daily quota, no sign-up.",
+      "version": "1.0.0",
+      "author": {
+        "name": "LLPRO LLC",
+        "email": "support@llpro.ai"
+      },
+      "homepage": "https://llpro.ai/connect?via=github",
+      "category": "productivity",
+      "keywords": ["mcp", "agents", "verification", "receipts"]
+    }
+  ]
+}
