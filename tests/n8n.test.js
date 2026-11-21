@@ -1,18 +1,30 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert');
-const { Llpro, ENDPOINTS } = require('../n8n/nodes/Llpro/Llpro.node.js');
-const { LlproApi } = require('../n8n/credentials/LlproApi.credentials.js');
+const { Llpro, ENDPOINTS } = require('../n8n/dist/nodes/Llpro/Llpro.node.js');
+const { LlproApi } = require('../n8n/dist/credentials/LlproApi.credentials.js');
 const pkg = require('../n8n/package.json');
 
-function ctx(params, { key, response, continueOnFail = false } = {}) {
+function ctx(params, { key, response, continueOnFail = false, items = [{ json: {} }], reject } = {}) {
   const calls = [];
   const c = {
-    getInputData: () => [{ json: {} }],
+    getInputData: () => items,
     getNodeParameter: (n, i, d) => (n in params ? params[n] : d),
+    getNode: () => ({ name: 'LLPRO', type: 'llpro', credentials: key ? { llproApi: { id: '1', name: 'k' } } : {} }),
     getCredentials: async () => { if (!key) throw new Error('no credentials'); return { apiKey: key }; },
     continueOnFail: () => continueOnFail,
-    helpers: { httpRequest: async (o) => { calls.push(o); return response; } },
+    helpers: {
+      httpRequest: async (o) => { calls.push({ ...o, auth: 'none' }); if (reject) throw new Error(reject); return response; },
+      // Stand-in for n8n: applies the credential's own authenticate rule.
+      httpRequestWithAuthentication: async (name, o) => {
+        assert.strictEqual(name, 'llproApi');
+        const rule = new LlproApi().authenticate.properties.headers.Authorization;
+        const value = rule.replace(/^=/, '').replace('{{$credentials.apiKey.trim()}}', key.trim());
+        calls.push({ ...o, auth: name, headers: { ...o.headers, Authorization: value } });
+        if (reject) throw new Error(reject);
+        return response;
+      },
+    },
   };
   return { c, calls };
 }
@@ -25,7 +37,12 @@ test('package is a community node package with fixed paths', () => {
   assert.strictEqual(pkg.scripts.install, undefined);
   assert.strictEqual(pkg.scripts.postinstall, undefined);
   for (const p of [...pkg.n8n.nodes, ...pkg.n8n.credentials]) require('../n8n/' + p);
-  assert.strictEqual(new LlproApi().properties[0].typeOptions.password, true);
+  assert.deepStrictEqual(pkg.files, ['dist']);
+  assert.strictEqual(pkg.n8n.strict, true);
+  const cred = new LlproApi();
+  assert.strictEqual(cred.properties[0].typeOptions.password, true);
+  assert.strictEqual(cred.test.request.url, 'https://llpro.ai/pay/credit/balance?via=github');
+  assert.strictEqual(cred.test.request.method, 'GET');
 });
 
 test('ground truth: place call, via header, no key without credential', async () => {
@@ -37,6 +54,7 @@ test('ground truth: place call, via header, no key without credential', async ()
   assert.deepStrictEqual(calls[0].body, { topic: 'river_level', place: 'Lafayette, LA' });
   assert.strictEqual(calls[0].headers['X-LLPRO-Via'], 'n8n');
   assert.strictEqual(calls[0].headers.Authorization, undefined);
+  assert.strictEqual(calls[0].auth, 'none');
   assert.strictEqual(calls[0].disableFollowRedirect, true);
 });
 
@@ -54,6 +72,7 @@ test('countersign sends producer, kind only when set; key sent as bearer', async
   assert.strictEqual(calls[0].url, ENDPOINTS.countersign);
   assert.deepStrictEqual(calls[0].body, { output: '12 * 4 = 48', producer: { agent_id: 'wf' }, kind: 'calculation' });
   assert.strictEqual(calls[0].headers.Authorization, 'Bearer llk_secret123');
+  assert.strictEqual(calls[0].auth, 'llproApi');
 });
 
 test('agent record', async () => {
@@ -96,4 +115,43 @@ test('empty inputs fail before any call', async () => {
 test('only the three LLPRO https endpoints exist', () => {
   assert.deepStrictEqual(Object.values(ENDPOINTS).sort(), [
     'https://agentrecord.llpro.ai/v1/lookup', 'https://countersign.llpro.ai/v1/stamp', 'https://gt.llpro.ai/v1/ask']);
+});
+
+test('the node never writes the key itself; only the credential rule adds it', () => {
+  const src = require('fs').readFileSync(require.resolve('../n8n/dist/nodes/Llpro/Llpro.node.js'), 'utf8');
+  assert.ok(!/Authorization/.test(src));
+  assert.ok(!/process\.env|readFileSync|require\(['"]fs/.test(src));
+});
+
+test('credential attached but blank key goes the free way', async () => {
+  const { c, calls } = ctx({ operation: 'agentRecord', target: 'x' }, { key: '   ', response: { statusCode: 200, body: {} } });
+  await run(c);
+  assert.strictEqual(calls[0].auth, 'none');
+  assert.strictEqual(calls[0].headers.Authorization, undefined);
+});
+
+test('429 wording, one error item per input with pairedItem', async () => {
+  const { c } = ctx({ operation: 'agentRecord', target: 'x' },
+    { continueOnFail: true, items: [{ json: {} }, { json: {} }], response: { statusCode: 429, body: { error: 'slow down' } } });
+  const [out] = await run(c);
+  assert.strictEqual(out.length, 2);
+  assert.match(out[1].json.error, /^Daily ceiling reached, try again later: slow down/);
+  assert.deepStrictEqual(out[1].pairedItem, { item: 1 });
+});
+
+test('a plain-text body comes back as answer', async () => {
+  const { c } = ctx({ operation: 'agentRecord', target: 'x' }, { response: { statusCode: 200, body: 'hello' } });
+  const [out] = await run(c);
+  assert.deepStrictEqual(out[0].json, { answer: 'hello' });
+});
+
+test('a transport error naming the key is redacted', async () => {
+  const { c } = ctx({ operation: 'agentRecord', target: 'x' }, { key: 'llk_secret123', reject: 'socket hang up llk_secret123' });
+  await assert.rejects(run(c), (e) => { assert.ok(!e.message.includes('llk_secret123') && e.message.includes('[key]')); return true; });
+});
+
+test('User-Agent version follows package.json', async () => {
+  const { c, calls } = ctx({ operation: 'agentRecord', target: 'x' }, { response: { statusCode: 200, body: {} } });
+  await run(c);
+  assert.strictEqual(calls[0].headers['User-Agent'], 'n8n-nodes-llpro/' + pkg.version);
 });

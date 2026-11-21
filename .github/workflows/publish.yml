@@ -1,0 +1,79 @@
+# Publishes n8n/ (n8n-nodes-llpro) to npm with a provenance statement, as n8n requires for verified community nodes
+# (May 2026 rule). Runs only when a tag n8n-v<version> is pushed and the tag matches n8n/package.json.
+# One-time setup (needs the LLPRO npm account): the FIRST release needs a granular publish token saved as the repo
+# secret NPM_TOKEN (npm lets you add a Trusted Publisher only to a package that exists). After it, add a Trusted
+# Publisher for this repository with workflow name publish.yml and delete the secret. Add a required reviewer to the
+# GitHub environment "npm" so no tag publishes without a person's OK.
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'n8n-v*.*.*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Lint, build and test n8n-nodes-llpro
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: n8n
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Tag matches package version
+        run: |
+          want="n8n-v$(node -p "require('./package.json').version")"
+          [ "$GITHUB_REF_NAME" = "$want" ] || { echo "tag $GITHUB_REF_NAME does not match $want"; exit 1; }
+
+      - name: Install from the lockfile (no install scripts)
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Lint (n8n rules), build, test
+        run: |
+          npm run lint
+          npm test
+
+      - name: Pack
+        run: npm pack
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: n8n/n8n-nodes-llpro-*.tgz
+          if-no-files-found: error
+
+  publish:
+    name: Publish to npm with provenance
+    needs: build
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: npm new enough for trusted publishing
+        run: npm i -g npm@^11.5.1
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+
+      - name: Publish
+        run: npm publish ./n8n-nodes-llpro-*.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

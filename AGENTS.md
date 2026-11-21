@@ -37,17 +37,22 @@ each for three LLPRO services; rules 1-3 and 8 are for the bridge, and the packa
 
 ## Rules for `n8n/`
 
-1. No runtime dependencies; plain CommonJS, no build step, no install scripts.
-2. The only network addresses are `gt.llpro.ai/v1/ask`, `countersign.llpro.ai/v1/stamp` and
-   `agentrecord.llpro.ai/v1/lookup`, called only when the node runs. No telemetry. Never follow redirects.
+1. No runtime dependencies (only the `n8n-workflow` peer); TypeScript built by `@n8n/node-cli` into `dist/`
+   (not committed), no install scripts. `npm run lint` (n8n's own rules) must pass before a release.
+2. The only network addresses are `gt.llpro.ai/v1/ask`, `countersign.llpro.ai/v1/stamp`,
+   `agentrecord.llpro.ai/v1/lookup` (called only when the node runs) and the credential test, which reads the key's
+   balance at `llpro.ai/pay/credit/balance` (no charge). No telemetry. Never follow redirects.
 3. Fixed attribution header `X-LLPRO-Via: n8n`; never a per-install or per-user id.
-4. A credit key is never put in output or error text.
+4. A credit key is never put in output or error text, and the node never writes the key itself: calls with a key go
+   through n8n's `httpRequestWithAuthentication` and the credential's `authenticate` rule.
+5. Releases go to npm only from GitHub Actions (`.github/workflows/publish.yml`, tag `n8n-v<version>`) with a
+   provenance statement; never publish from a laptop.
 
 ## Test
 
-    node --test tests/n8n.test.js
+    cd n8n && npm install && npm test    # n8n node: builds, then node --test ../tests/n8n.test.js
 
-Tests run against a local fake server and never call llpro.ai.
+Tests use local stand-ins (a fake server, or a stub of n8n's HTTP helpers) and never call llpro.ai.
 
     python3 -m unittest discover -s tests -p "test_*.py"
     node --test tests/bridge.test.js

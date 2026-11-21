@@ -1,0 +1,14 @@
+{
+	"node": "n8n-nodes-llpro.llpro",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Development", "Utility"],
+	"resources": {
+		"credentialDocumentation": [
+			{ "url": "https://github.com/llpro-ai/llpro-campus/tree/main/n8n#past-the-free-allowance" }
+		],
+		"primaryDocumentation": [
+			{ "url": "https://github.com/llpro-ai/llpro-campus/tree/main/n8n" }
+		]
+	}
+}

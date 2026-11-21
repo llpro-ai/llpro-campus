@@ -1,22 +1,57 @@
 {
   "name": "n8n-nodes-llpro",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "n8n node for LLPRO: cited public facts (Ground Truth), signed checks of AI work (Countersign) and public agent records (Agent Record). Free daily allowance, no sign-up.",
-  "keywords": ["n8n-community-node-package", "n8n", "llpro", "ai-agents", "verification"],
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "llpro",
+    "ai-agents",
+    "verification"
+  ],
   "homepage": "https://llpro.ai/connect?via=github",
-  "author": { "name": "LLPRO LLC", "email": "support@llpro.ai" },
+  "author": {
+    "name": "LLPRO LLC",
+    "email": "support@llpro.ai"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/llpro-ai/llpro-campus.git",
     "directory": "n8n"
   },
-  "bugs": { "url": "https://github.com/llpro-ai/llpro-campus/issues", "email": "support@llpro.ai" },
-  "engines": { "node": ">=18" },
-  "files": ["credentials", "nodes", "README.md"],
-  "scripts": { "test": "node --test ../tests/n8n.test.js" },
+  "bugs": {
+    "url": "https://github.com/llpro-ai/llpro-campus/issues",
+    "email": "support@llpro.ai"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "n8n-node build",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "test": "npm run build && node --test ../tests/n8n.test.js"
+  },
   "n8n": {
     "n8nNodesApiVersion": 1,
-    "credentials": ["credentials/LlproApi.credentials.js"],
-    "nodes": ["nodes/Llpro/Llpro.node.js"]
+    "strict": true,
+    "credentials": [
+      "dist/credentials/LlproApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Llpro/Llpro.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "0.57.4",
+    "eslint": "9.32.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
   }
 }
