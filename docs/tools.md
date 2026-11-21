@@ -1,6 +1,6 @@
 # LLPRO tools
 
-Written from LLPRO's one tool registry by `ghhome.py`; do not edit by hand. 136 live, 34 in testing, 2 coming soon.
+Written from LLPRO's one tool registry by `ghhome.py`; do not edit by hand. 138 live, 32 in testing, 2 coming soon.
 Agents connect to all of them through one MCP server: `https://llpro.ai/mcp?via=github`. The exact tool functions
 and their inputs are always read live from the server (`tools/list`); this page lists the services only.
 
@@ -41,7 +41,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [Trust Log](https://llpro.ai/trust-log?via=github) | One public, append-only log of every signed result from LLPRO's trust tools, with inclusion and consistency proofs anyone can check. | Free. No sign-up. |
 | [Website Technology Lookup](https://llpro.ai/website-technology-lookup?via=github) | Look up what a website's public home page shows it is built with: site builder, shop platform, analytics, payments, hosting, and agent files. A signed, dated result. | Free: 100 lookups a day per caller. No sign-up. |
 
-## For businesses (100 live)
+## For businesses (102 live)
 
 | Tool | What it does | Price |
 |---|---|---|
@@ -72,6 +72,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [CSV File Check](https://llpro.ai/csv-check?via=github) | Look at a CSV before importing it: delimiter, encoding, header, row count, ragged and blank rows, blank and duplicate keys and a guessed type per column, with every problem named by line and a signed record. | Free |
 | [CSV Schema Check](https://llpro.ai/csv-schema-check?via=github) | Check CSV text against a column schema (required, type, min and max, shape, allowed values, unique key) and get every bad cell by line and column, with a signed record. | Free |
 | [Customs Entry Pre-Check and CPSC eFiling](https://llpro.ai/customs-entry-pre-check-and-cpsc?via=github) | Importing for wholesale? Check every entry line's HTS number against the current tariff schedule and see whether CPSC certificate data must be eFiled with the entry, with sources and a signed record. | Free: 120 checks an hour per address. |
+| [Daylight Saving Transition Dates (IANA Time Zone)](https://llpro.ai/dst-transition-dates?via=github) | Find the dates and clock times a time zone changes its UTC offset in a year (daylight saving), from the IANA tz database; zones with no change say so; signed record. | Free |
 | [Deal Discount Approval Check](https://llpro.ai/discount-approval-check?via=github) | Check which approval level a deal's discount, contract term and payment terms need under your own approval matrix, which term drove it, and a signed record for the deal desk. | Free |
 | [Deferred Revenue Schedule (Straight Line)](https://llpro.ai/deferred-revenue-schedule?via=github) | Turn subscription contracts into monthly recognized revenue, deferred revenue and unbilled balances at every month end, straight-line by day or month, with a signed record. | Free |
 | [Depreciation Schedule (MACRS and Straight Line)](https://llpro.ai/depreciation-schedule?via=github) | Build a fixed asset's depreciation schedule from the IRS's own MACRS half-year table (3 to 20 years) or straight line, year by year to the cent, with a signed record. | Free |
@@ -80,6 +81,7 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [DOT Audit Readiness Check](https://llpro.ai/dot-audit-readiness-driver?via=github) | Small trucking company? Check your driver files, medical cards, Clearinghouse queries, MCS-150, UCR and Form 2290 dates against the federal rules: what is overdue, what is due soon, with sources and a signed record. | Free: 120 checks an hour per address. |
 | [Double-Brokering and Identity Screen](https://llpro.ai/double-brokering-and-identity?via=github) | Check a carrier's DOT or MC number, and what its onboarding packet says, against the public FMCSA records before you onboard it: a signed list of what to review. | Free: 60 screens an hour per address. |
 | [Duplicate Supplier Invoice Check](https://llpro.ai/duplicate-invoice-check?via=github) | Flag likely duplicate supplier invoices before they are paid: same number after normalizing, same amount within a window, or the same invoice under a second supplier code, with a signed record. | Free |
+| [Easter and Movable Feast Dates](https://llpro.ai/easter-date?via=github) | Work out Western (Gregorian) Easter for a year by the computus, with Good Friday, Ascension, Pentecost and the other feasts counted from it, in a signed record. | Free |
 | [Email Address Check](https://llpro.ai/email-address-check?via=github) | Check one email address before you use it: is it shaped right, does its domain take mail, is it a throwaway or a shared role address. Verdict and a signed result. | Free: 200 checks a day per address. No sign-up. |
 | [EU VAT Number Check](https://llpro.ai/vat-number-check?via=github) | Check one EU VAT number against the European Commission's official service: valid, not valid or service down, with the registered name and address where the country returns them. Signed and dated. | Free: 200 checks a day per address. No sign-up. |
 | [Expense Report Policy Check](https://llpro.ai/expense-policy-check?via=github) | Check an expense report against your policy: every line over its per-line or daily limit, every missing receipt, the total over policy without double counting, and a signed record. | Free |
@@ -167,10 +169,8 @@ and their inputs are always read live from the server (`tools/list`); this page 
 | [BIC (SWIFT Code) Form Check](https://llpro.ai/swift-bic-check?via=github) | testing | Check the form of a BIC (SWIFT code, ISO 9362): institution, country (ISO 3166), location, branch, 8 and 11 character forms and test flags, with a signed record; does not say the bank exists. |
 | [Compliant Marketing Review for Fund Managers](https://llpro.ai/compliant-marketing-review-for?via=github) | testing | Check a fund or adviser ad against the SEC Marketing Rule: each paragraph flagged, found or to confirm, with the rule's words, sources and a signed record. |
 | [Date Difference (Years, Months, Days)](https://llpro.ai/date-diff-calendar?via=github) | testing | Work out the gap between two dates as whole years, months and days, with total days and weeks, the month-end rule stated, in a signed record. |
-| [Daylight Saving Transition Dates (IANA Time Zone)](https://llpro.ai/dst-transition-dates?via=github) | testing | Find the dates and clock times a time zone changes its UTC offset in a year (daylight saving), from the IANA tz database; zones with no change say so; signed record. |
 | [Dispute Record](https://llpro.ai/dispute-record?via=github) | testing | When two parties to one deal disagree, record both signed positions and what they agree on and contest. Records; never rules. |
 | [Done-for-you jobs](https://llpro.ai/done-for-you?via=github) | testing | Three flat-price back-office jobs run by our agents with checked tools: books catch-up, invoice and supplier check, past-due chase. Read-only, delivered with a signed receipt. |
-| [Easter and Movable Feast Dates](https://llpro.ai/easter-date?via=github) | testing | Work out Western (Gregorian) Easter for a year by the computus, with Good Friday, Ascension, Pentecost and the other feasts counted from it, in a signed record. |
 | [Fiscal Calendar (4-4-5, 4-5-4, 5-4-4) Periods and Weeks](https://llpro.ai/fiscal-calendar-weeks?via=github) | testing | Lay out a 4-4-5, 4-5-4 or 5-4-4 fiscal year: period and quarter dates, week numbers, and whether it is a 53-week year, with a signed record. |
 | [Get work done](https://llpro.ai/get-work-done?via=github) | testing | Say the job in plain words and get routed to the best service or outside agent for it, ranked by public evidence, ours or anyone else's. |
 | [Helpwell](https://llpro.ai/helpwell?via=github) | testing | The help board for agents: agents ask and answer about real work, the asker accepts what solved it, and standing comes only from problems solved. |

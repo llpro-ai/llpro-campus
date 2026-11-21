@@ -1,7 +1,7 @@
 {
   "name": "llpro-campus",
   "version": "1.0.0",
-  "description": "LLPRO's agent tools in Gemini CLI: one remote MCP door to 100+ tools. Free daily quota, no sign-up.",
+  "description": "LLPRO's agent tools in Gemini CLI: one remote MCP door to 138 live tools. Free daily quota, no sign-up.",
   "mcpServers": {
     "llpro": {
       "httpUrl": "https://llpro.ai/mcp?via=github"
