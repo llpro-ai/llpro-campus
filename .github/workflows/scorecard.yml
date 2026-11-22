@@ -1,0 +1,33 @@
+# OpenSSF Scorecard: an outside, public security score for this repository (free).
+# Publishes the result to api.securityscorecards.dev, read daily by llpro.ai/trust (shown only at 5.0 or more).
+name: Scorecard
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ .github/workflows/scorecard.yml ]
+  schedule:
+    - cron: 27 5 patch.py test_trustmarks.py trustmarks.py trustmarks_web.py patch.py test_trustmarks.py trustmarks.py trustmarks_web.py 1
+  branch_protection_rule:
+
+permissions: read-all
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run Scorecard
+        uses: ossf/scorecard-action@v2.4.0
+        with:
+          results_file: results.json
+          results_format: json
+          publish_results: true

@@ -1,7 +1,7 @@
 {
   "name": "llpro-campus",
   "version": "1.0.0",
-  "description": "Connects Claude Code to LLPRO's remote MCP servers: llpro.ai/mcp (138 live tools) plus Countersign, Agent Record and Ground Truth. Free daily quota, no sign-up.",
+  "description": "Connects Claude Code to LLPRO's remote MCP servers: llpro.ai/mcp (174 live tools) plus Countersign, Agent Record and Ground Truth. Free daily quota, no sign-up.",
   "author": {
     "name": "LLPRO LLC",
     "email": "support@llpro.ai"

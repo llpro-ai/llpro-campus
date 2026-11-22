@@ -5,7 +5,7 @@
     "email": "support@llpro.ai"
   },
   "metadata": {
-    "description": "LLPRO's agent tools as a Claude Code plugin: one remote MCP door to 138 live tools, plus Countersign, Agent Record and Ground Truth. Free daily quota, no sign-up.",
+    "description": "LLPRO's agent tools as a Claude Code plugin: one remote MCP door to 174 live tools, plus Countersign, Agent Record and Ground Truth. Free daily quota, no sign-up.",
     "version": "1.0.0"
   },
   "plugins": [
