@@ -46,7 +46,7 @@ jobs:
       - name: Pack
         run: npm pack
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: package
           path: n8n/n8n-nodes-llpro-*.tgz
