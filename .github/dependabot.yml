@@ -1,0 +1,15 @@
+# Dependabot: weekly checks for outdated or vulnerable dependencies (free).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 2
+  - package-ecosystem: pip
+    directories: [ /python, /langchain ]
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 2
+  - package-ecosystem: npm
+    directories: [ /npm, /n8n ]
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 2
